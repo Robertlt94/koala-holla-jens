@@ -1,43 +1,49 @@
 // const { Router } = require('express');
-const express = require('express');
-const router = express.Router();
+const express = require( 'express' );
+const koalaRouter = express.Router();
 // DB CONNECTION
 const pool = require( '../routes/pool' );
 
-let koalaFamily = [];
-
-// Source input values to match up with for query submission to add koalas
-// let a1 = $( '#nameIn' ).val();
-// let b2 = $( '#genderIn' ).val();
-// let c3 = $( '#ageIn' ).val();
-// let d4 = $( '#readyForTransferIn' ).val();
-// let e5 = $( '#notesIn' ).val();
+// let koalaFamily = [];
 
 // GET
-router.get( '/', ( req, res )=>{
-	console.log( 'in /koalaFamily GET' );
-    const queryString = `SELECT * FROM koalaChart`;
+koalaRouter.get( '/', ( req, res )=>{
+    console.log( 'in /koalaChart GET' );
+    const queryString = `SELECT * FROM koalaChart ORDER BY id ASC;`;
     pool.query( queryString ).then( ( result )=>{
-        res.send( result.rows );
+      res.send( result.rows );
     }).catch( ( err )=>{
-        console.log( err );
-        res.sendStatus( 500 );
-    }) // end query
-	/// - replace sending the array with data from db table SELECT
-	// res.send( inventory );
-})
+      console.log( err );
+      res.sendStatus( 500 );
+    })
+  })
 
 // POST
-router.post( '/', ( req, res )=>{
-	console.log( 'in koalaFamily POST:', req.body );
-	/// - replace array push with db table INSERT
-	koalaFamily.push( req.body );
-	res.sendStatus( 200 );
-})
+koalaRouter.post( '/', ( req, res )=>{
+    console.log( 'in /koalaChart POST:', req.body );
+    const queryString = `INSERT INTO koalaChart ( name, age, gender, ready_to_transfer, notes ) VALUES ( $1, $2, $3, $4, $5 );`
+    const values = [ req.body.name, req.body.age, req.body.gender, req.body.readyToTransfer, req.body.notes ];
+    pool.query( queryString, values ).then( ( result )=>{
+      res.sendStatus( 201 );
+    }).catch( ( err )=>{
+      console.log( err );
+      res.sendStatus( 500 );
+    })
+  });
 
 // PUT
-
+koalaRouter.put( '/', ( req, res )=>{
+    console.log( 'in /koalaChart PUT:', req.query );
+    let queryString = `UPDATE koalaChart SET ready_to_transfer=true WHERE id=$1;`;
+    let values = [ req.query.id ];
+    pool.query( queryString, values ).then( ( results )=>{
+      res.sendStatus( 200 );
+    }).catch( ( err )=>{
+      console.log( err );
+      res.sendStatus( 500 );
+    })
+  })
 
 // DELETE
 
-module.exports = router;
+module.exports = koalaRouter;

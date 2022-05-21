@@ -7,10 +7,14 @@ CREATE TABLE koalaChart(
 	"notes" varchar(128)
 );
 
-SELECT * FROM koalaChart;
-INSERT INTO koalaChart (name, gender, age, ready_to_transfer, notes) VALUES ( 'Scotty', 'M', '4', 'Y', 'Born in Guatemala')
-INSERT INTO koalaChart (name, gender, age, ready_to_transfer, notes) VALUES ( 'Jean', 'F', '5', 'Y', 'Allergic to lots of lava')
-INSERT INTO koalaChart (name, gender, age, ready_to_transfer, notes) VALUES ( 'Ororo', 'F', '7', 'N', 'Loves listening to Paula (Abdul)')
-INSERT INTO koalaChart (name, gender, age, ready_to_transfer, notes) VALUES ( 'Logan', 'M', '15', 'N', 'Loves the sauna')
-INSERT INTO koalaChart (name, gender, age, ready_to_transfer, notes) VALUES ( 'Charlie', 'M', '9', 'Y', 'Favorite band is Nirvana')
-INSERT INTO koalaChart (name, gender, age, ready_to_transfer, notes) VALUES ( 'Betsy', 'F', '4', 'Y', 'Has a pet iguana')
+
+SELECT * FROM koalaChart ORDER BY id ASC;
+
+INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Scotty', '4', 'M', 'Y', 'Born in Guatemala')
+INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Jean', '5', 'F', 'Y', 'Allergic to lots of lava')
+INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Ororo', '7', 'F', 'N', 'Loves listening to Paula (Abdul)')
+INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Logan', '15', 'M', 'N', 'Loves the sauna')
+INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Charlie', '9', 'M', 'Y', 'Favorite band is Nirvana')
+INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Betsy', '4', 'F', 'Y', 'Has a pet iguana')
+
+UPDATE koalas SET ready_for_transfer=true WHERE id=2;
