@@ -17,4 +17,4 @@ INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'L
 INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Charlie', '9', 'M', 'Y', 'Favorite band is Nirvana')
 INSERT INTO koalaChart (name, age, gender, ready_to_transfer, notes) VALUES ( 'Betsy', '4', 'F', 'Y', 'Has a pet iguana')
 
-UPDATE koalas SET ready_for_transfer=true WHERE id=2;
+UPDATE koalas SET ready_to_transfer=true WHERE id=2;
